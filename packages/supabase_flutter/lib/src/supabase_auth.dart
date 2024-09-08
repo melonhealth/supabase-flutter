@@ -336,7 +336,7 @@ extension GoTrueClientSignInProvider on GoTrueClient {
     return await launchUrl(
       Uri.parse(ssoUrl),
       mode: launchMode,
-      webOnlyWindowName: '_self',
+      webOnlyWindowName: '_blank',
     );
   }
 
