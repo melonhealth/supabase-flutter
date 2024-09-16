@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io' show Platform;
 import 'dart:math';
+import 'dart:html' as html;
 
 import 'package:app_links/app_links.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -333,11 +334,17 @@ extension GoTrueClientSignInProvider on GoTrueClient {
       redirectTo: redirectTo,
       captchaToken: captchaToken,
     );
-    return await launchUrl(
-      Uri.parse(ssoUrl),
-      mode: launchMode,
-      webOnlyWindowName: '_blank',
-    );
+    // For web, we open the window with JavaScript to ensure window.opener is set
+    if (html.window != null) {
+      html.window.open(ssoUrl, 'supabase-auth-popup');
+    } else {
+      // Fallback for non-web platforms using url_launcher package
+      return await launchUrl(
+        Uri.parse(ssoUrl),
+        mode: LaunchMode.platformDefault,
+      );
+    }
+    return true;
   }
 
   String generateRawNonce() {
