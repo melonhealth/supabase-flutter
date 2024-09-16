@@ -170,7 +170,7 @@ class SupabaseAuth with WidgetsBindingObserver {
       _deeplinkSubscription = _appLinks.uriLinkStream.listen(
         (Uri? uri) {
           if (uri != null) {
-            _handleDeeplink(uri);
+            handleDeeplink(uri);
           }
         },
         onError: (Object err, StackTrace stackTrace) {
@@ -210,7 +210,7 @@ class SupabaseAuth with WidgetsBindingObserver {
         }
       }
       if (uri != null) {
-        await _handleDeeplink(uri);
+        await handleDeeplink(uri);
       }
     } on PlatformException catch (err, stackTrace) {
       _onErrorReceivingDeeplink(err.message ?? err.toString(), stackTrace);
@@ -223,7 +223,7 @@ class SupabaseAuth with WidgetsBindingObserver {
   }
 
   /// Callback when deeplink receiving succeeds
-  Future<void> _handleDeeplink(Uri uri) async {
+  Future<void> handleDeeplink(Uri uri) async {
     if (!_isAuthCallbackDeeplink(uri)) return;
 
     Supabase.instance.log('***** SupabaseAuthState handleDeeplink $uri');

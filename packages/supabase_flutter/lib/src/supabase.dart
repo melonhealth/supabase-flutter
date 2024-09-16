@@ -147,6 +147,10 @@ class Supabase {
     _initialized = false;
   }
 
+  Future<void> handleDeeplink(Uri uri) async {
+    return await _instance._supabaseAuth.handleDeeplink(uri);
+  }
+
   void _init(
     String supabaseUrl,
     String supabaseAnonKey, {
