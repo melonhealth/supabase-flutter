@@ -147,7 +147,7 @@ class Supabase {
     _initialized = false;
   }
 
-  Future<void> handleDeeplink(Uri uri) async {
+  static Future<void> handleDeeplink(Uri uri) async {
     return await _instance._supabaseAuth.handleDeeplink(uri);
   }
 
