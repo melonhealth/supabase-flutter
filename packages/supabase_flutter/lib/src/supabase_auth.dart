@@ -335,7 +335,7 @@ extension GoTrueClientSignInProvider on GoTrueClient {
       captchaToken: captchaToken,
     );
     // For web, we open the window with JavaScript to ensure window.opener is set
-    if (html.window != null) {
+    if (kIsWeb) {
       html.window.open(ssoUrl, 'supabase-auth-popup');
     } else {
       // Fallback for non-web platforms using url_launcher package
