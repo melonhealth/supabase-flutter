@@ -341,7 +341,8 @@ extension GoTrueClientSignInProvider on GoTrueClient {
       // Fallback for non-web platforms using url_launcher package
       return await launchUrl(
         Uri.parse(ssoUrl),
-        mode: LaunchMode.platformDefault,
+        mode: launchMode,
+        webOnlyWindowName: '_self',
       );
     }
     return true;
